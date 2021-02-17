@@ -1,0 +1,74 @@
+body {
+    background-color: #EBEDEE;
+    margin: 0;
+}
+#main-container-page {
+    position: fixed;
+    display: grid;
+    grid-template-rows: 10% 30% 60%;
+    height: 1100px;
+    width: 700px;
+    padding: 15mm;
+    background-color: white;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 50px;
+}
+#invoice-title{
+    text-align: left;
+    font-size: 45px;
+    padding: 10px;
+}
+#header-container {
+    display: flex;
+    font-size: 10px;
+}
+#header-left {
+    width:65%;
+}
+#header-right{
+    width:35%;
+}
+#seller-block, #client-block {
+    padding: 10px;
+}
+#date-block, #number-block {
+    padding: 5px;
+    text-align: right;
+    margin-bottom: 25px;
+}
+#content-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+td:first-child {
+    width: 60%;
+}
+td {
+    font-size: 12px;
+    padding: 5px;
+    height: 25px;
+}
+.table-header {
+    text-align: center;
+    border: 1px solid black;
+}
+.underline {
+    border-bottom: 1px solid black;
+}
+.product-row {
+    background-color: seashell;
+}
+.content-right {
+    text-align: right;
+}
+@page {
+    size: A4 portrait;
+    margin: 0;
+    padding: 0;
+}
+@media print {
+    #main-container-page {
+        margin:0;
+    }
+}
