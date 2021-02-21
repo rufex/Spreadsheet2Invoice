@@ -23,4 +23,10 @@ python3 gen_invoice.py
 
 The generated invoice is going to be stored by default in the ***output*** directory.
 
+You can also select which invoice you want to generate by passing it's number as an argument while running the script (only one invoice can be generated at the moment). Like this:
+
+```bash
+python3 gen_invoice.py 2021-000002
+```
+
 > At the moment, it will generate an invoice with the information stored in the latest row of the spreadsheet.
