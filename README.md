@@ -16,7 +16,8 @@ Be able to keep track of all your invoices in a simple spreadsheet. And generate
 There is an example spreadsheet stored in the directory called ***spreadsheet***, you can modify that one to make a quick test export.
 
 Then, run the program:
-```
+
+```bash
 python3 gen_invoice.py
 ```
 

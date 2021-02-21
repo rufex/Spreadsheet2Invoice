@@ -3,7 +3,7 @@ import pathlib
 from weasyprint import HTML, CSS
 from jinja2 import Environment, FileSystemLoader
 
-from .config import root_path, invoice_dictio, output_path
+from .config import root_path, invoice_dictio
 
 # Paths
 template_path = root_path.joinpath('invoice_template')
@@ -58,6 +58,13 @@ def calc_vat():
 def calc_total():
     """Calculate the invoice total."""
     invoice_dictio['total'] = invoice_dictio['subtotal']+invoice_dictio['vat_amount']
+
+def output_name_invoice_number():
+    """Use the invoice number as the name of the export PDF."""
+    if 'invoice_number' in invoice_dictio:
+        output_str = invoice_dictio['invoice_number']+'.pdf'
+        custom_output_path = root_path.joinpath('output', output_str)
+        return custom_output_path
     
 def generate_pdf(output_path):
     """Render the information into the invoice template and export the pdf file."""
