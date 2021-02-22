@@ -27,18 +27,16 @@ def get_invoice_details(invoice_nr = None):
     If no specific invoice nr is passed, the last one is retrieved.
     """
     if invoice_nr != None:
-        try:
-            invoice_indexes = invoices_df.index[invoices_df['invoice_number'] == invoice_nr]
-        except:
-            print(f"The invoice nr. '{invoice_nr}' was not founded in the spreadsheet.")
+        invoice_indexes = invoices_df.index[invoices_df['invoice_number'] == invoice_nr]
+        if invoice_indexes.empty:
+            raise Exception(f"The invoice nr. '{invoice_nr}' was not founded in the spreadsheet.")
     else:
-        try:
-            # Invoice Nr. stored in the last row
-            last_row = invoices_df.iloc[-1]
-            last_row_invoice_nr = last_row['invoice_number']
-            invoice_indexes = invoices_df.index[invoices_df['invoice_number'] == last_row_invoice_nr]
-        except:
-            print(f"The invoice nr. stored in the last row of the spreadsheet is invalid or can't be reached.")
+        # Invoice Nr. stored in the last row
+        last_row = invoices_df.iloc[-1]
+        last_row_invoice_nr = last_row['invoice_number']
+        invoice_indexes = invoices_df.index[invoices_df['invoice_number'] == last_row_invoice_nr]
+        if invoice_indexes.empty:
+            raise Exception(f"The invoice nr. stored in the last row of the spreadsheet is invalid or can't be reached.")
     
     # First Row: Client and Invoice Information
     invoice_row = invoices_df.iloc[invoice_indexes[0]]

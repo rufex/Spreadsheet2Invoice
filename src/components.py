@@ -79,5 +79,8 @@ def generate_pdf(output_path):
     css = CSS(css_path)
     # SAVE PDF FILE
     html.write_pdf(output_path, stylesheets=[css])
-    # Clean invoice_dictio
-    #invoice_dictio =  {}
+    # Message
+    invoice_nr = invoice_dictio['invoice_number']
+    print(f'The invoice nr. {invoice_nr} was succesfully generated!')
+    # Clean products list for next invoices
+    invoice_dictio['products'] =  []
