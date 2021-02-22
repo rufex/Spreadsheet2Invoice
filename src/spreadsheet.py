@@ -28,17 +28,24 @@ def get_invoice_details(invoice_nr = None):
     """
     if invoice_nr != None:
         try:
-            invoice_index = invoices_df.index[invoices_df['invoice_number'] == invoice_nr][0]
-            invoice_row = invoices_df.iloc[invoice_index]
+            invoice_indexes = invoices_df.index[invoices_df['invoice_number'] == invoice_nr]
         except:
-            print(f'The invoice nr. "{invoice_nr}" was not founded in the spreadsheet.')
+            print(f"The invoice nr. '{invoice_nr}' was not founded in the spreadsheet.")
     else:
-        # Last Row
-        invoice_row = invoices_df.iloc[-1]
-
-    # Client
+        try:
+            # Invoice Nr. stored in the last row
+            last_row = invoices_df.iloc[-1]
+            last_row_invoice_nr = last_row['invoice_number']
+            invoice_indexes = invoices_df.index[invoices_df['invoice_number'] == last_row_invoice_nr]
+        except:
+            print(f"The invoice nr. stored in the last row of the spreadsheet is invalid or can't be reached.")
+    
+    # First Row: Client and Invoice Information
+    invoice_row = invoices_df.iloc[invoice_indexes[0]]
     client_info(invoice_row['client_name'],invoice_row['client_address'],invoice_row['client_city'],invoice_row['client_vat'])
-    # Invoice Information
     invoice_info(invoice_row['invoice_date'],invoice_row['invoice_number'])
-    # Product
-    add_product(invoice_row['product_description'],invoice_row['product_unit_price'],invoice_row['product_units_amount'])
+
+    # Every Row: Products Information
+    for i in invoice_indexes:
+        invoice_row = invoices_df.iloc[i]
+        add_product(invoice_row['product_description'],invoice_row['product_unit_price'],invoice_row['product_units_amount'])

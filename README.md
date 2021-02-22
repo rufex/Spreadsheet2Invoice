@@ -21,7 +21,9 @@ Then, run the program:
 python3 gen_invoice.py
 ```
 
-The generated invoice is going to be stored by default in the ***output*** directory.
+This will look for the information stored in the latest row of the spreadsheet and the generated invoice is going to be stored by default in the ***output*** directory.
+
+### Choose which invoice to export
 
 You can also select which invoice you want to generate by passing it's number as an argument while running the script (only one invoice can be generated at the moment). Like this:
 
@@ -29,4 +31,6 @@ You can also select which invoice you want to generate by passing it's number as
 python3 gen_invoice.py 2021-000002
 ```
 
-> At the moment, it will generate an invoice with the information stored in the latest row of the spreadsheet.
+### Multiple products in the same invoice
+
+To include several products in the same invoice, you have to include each product in a separate row in the spreadsheet. To be generated in the same invoice they just need to have the same invoice number assigned. The client information and the invoice date is going to be taken from the first product listed, so there is no need to define them again for the following products. You can have a look at the example provided in the *template.xlsx* file
